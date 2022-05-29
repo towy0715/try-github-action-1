@@ -21,3 +21,9 @@ jobs:
         run: |
           node -v
           npm -v
+      - name: python commands
+        run: |
+          import platform
+          print(platform.processor())
+          # to define which shell to use (not bash)
+        shell: python
