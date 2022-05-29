@@ -13,7 +13,11 @@ jobs:
         # <profile>/<repository name>@<master / tag version / id of commit version>
         # use the commit version would be the safest way
         uses: actions/hello-world-javascript-action@v1.1
+        # here is the input for the hello-world-javascript-action
+        # the input parameter name is defined with name "who-to-greet"
         with:
           who-to-greet: John
       - name: Log Greeting Time
-        run: echo "${{ steps.greet.outpluts.time }}"
+        # the ${{ steps.greet.outputs.time }}" is the output of the actions above
+        # you can see it is reference the action with id = greet
+        run: echo "${{ steps.greet.outputs.time }}"
