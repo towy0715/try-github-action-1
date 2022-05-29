@@ -31,6 +31,7 @@ jobs:
         shell: python
   run-windows-command:
     runs-on: windows-latest
+    needs: ["run-shell-command"]
     # the default language of window would be power shell
     steps:
       - name: directory powershell
