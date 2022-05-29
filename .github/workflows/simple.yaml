@@ -1,16 +1,23 @@
 # the entire name of the workflow
 name: Shell commands
 
-# define which event 
+# define which event to listen(?)
 on: [push]
 
+# define the jobs (which include the steps)
 jobs: 
-  run-shell-command:
+  run-shelll-command:
+    # environment that the jobs should be execute
     runs-on: ubuntu-latest
+    # here to define the step of the jobs
     steps: 
+      # step 1: to echo string
       - name: echo a string
+        # actual command to be run
         run: echo "Hello World"
+      # step 2: to echo string with multiple line
       - name: multiline script
+        # actual command to be run (use | for multiple line)
         run: |
           node -v
           npm -v
