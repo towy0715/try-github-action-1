@@ -1,0 +1,19 @@
+name: Actions Workflow
+
+on: [push]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple JS Action
+        id: greet
+        # instead of "run", we can use "uses" which take a reference to an action
+        # to use other action, the reference path are in the follow format:
+        # <profile>/<repository name>@<master / tag version / id of commit version>
+        # use the commit version would be the safest way
+        uses: actions/hello-world-javascript-action@v1.1
+        with:
+          who-to-greet: John
+      - name: Log Greeting Time
+        run: echo "${{ steps.greet.outpluts.time }}"
