@@ -26,11 +26,15 @@ jobs:
         run: |
           import platform
           print(platform.processor())
-          # to define which shell to use (not bash)
         # in order to change the running shell, you need to define with shell
+        # to define which shell to use (not bash)
         shell: python
   run-windows-command:
     runs-on: windows-latest
     # the default language of window would be power shell
     steps:
-      - name: 
+      - name: directory powershell
+        run: Get-Location
+      - name: directory bash
+        run: pwd
+        shell: bash
