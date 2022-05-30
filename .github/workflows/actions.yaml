@@ -6,15 +6,19 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
-      - name: List Files
+      - name: List Files before checkout
         run: |
           pwd
-          ls
+          ls -a
       - name: checkout
         # this is the official action to checkout the code
         # the checkout action would authenticate with our repository
         # and fetch the code and checkout into the VM
         uses: actions/checkout@v1
+      - name: List Files after checkout
+        run: |
+          pwd
+          ls -a
       - name: Simple JS Action
         id: greet
         # instead of "run", we can use "uses" which take a reference to an action
