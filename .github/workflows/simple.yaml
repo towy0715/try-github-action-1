@@ -2,7 +2,7 @@
 name: Shell commands
 
 # define which event to listen(?)
-on: [push]
+on: [workflow_call]
 
 # define the jobs (which include the steps)
 jobs: 
