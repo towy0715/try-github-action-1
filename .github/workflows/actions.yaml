@@ -1,6 +1,7 @@
 name: Actions Workflow
 
 on: 
+  push: 
   repository_dispatch:
     # this is optional
     types: [build]
