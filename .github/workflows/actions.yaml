@@ -1,19 +1,19 @@
 name: Actions Workflow
 
 on: 
-  #push: 
+  push: 
   schedule:
     # to set the schedule, here use the cron schedule expression
     # i.e. minutes(分鐘), hours(小時), day of month(日期), month(月份), day of week(星期)
     # if (1 * * * *) = minute 1 of every hour -> 12:01, 13:01 etc
     # if (0/5 * * * *) = starting with 0 minute, run every 5 mins
-    - cron: "0/5 * * * *"
+    - cron: "0/6 * * * *"
     # sample to show this is an array
     #- cron: "0/6 * * * *"  
   # listening to the pull request
-  pull_request:
+  #pull_request:
     # the following are the activity types
-    types: [closed, assigned, opened, reopened]
+    #types: [closed, assigned, opened, reopened]
 jobs:
   run-github-actions:
     runs-on: ubuntu-latest
