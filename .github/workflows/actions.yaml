@@ -9,7 +9,7 @@ on:
     # if (0/5 * * * *) = starting with 0 minute, run every 5 mins
     #- cron: "0/6 * * * *"
     # sample to show this is an array
-    - cron: "0/6 * * * *"  
+    - cron: "0 18 * * *"  
   # listening to the pull request
   #pull_request:
     # the following are the activity types
