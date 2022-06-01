@@ -1,7 +1,10 @@
 name: Actions Workflow
 
 on: 
-  push: 
+  repository_dispatch:
+    # this is optional
+    types: [build]
+  #push: 
   #schedule:
     # to set the schedule, here use the cron schedule expression
     # i.e. minutes(分鐘), hours(小時), day of month(日期), month(月份), day of week(星期)
