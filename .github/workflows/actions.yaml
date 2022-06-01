@@ -1,0 +1,52 @@
+name: Actions Workflow
+
+on: 
+  push: 
+  repository_dispatch:
+    # this is optional
+    types: [build]
+  #push: 
+  #schedule:
+    # to set the schedule, here use the cron schedule expression
+    # i.e. minutes(分鐘), hours(小時), day of month(日期), month(月份), day of week(星期)
+    # if (1 * * * *) = minute 1 of every hour -> 12:01, 13:01 etc
+    # if (0/5 * * * *) = starting with 0 minute, run every 5 mins
+    #- cron: "0/6 * * * *"
+    # sample to show this is an array
+    #- cron: "0 18 * * *"  
+  # listening to the pull request
+  #pull_request:
+    # the following are the activity types
+    #types: [closed, assigned, opened, reopened]
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Files before checkout
+        run: |
+          pwd
+          ls -a
+      - name: checkout
+        # this is the official action to checkout the code
+        # the checkout action would authenticate with our repository
+        # and fetch the code and checkout into the VM
+        uses: actions/checkout@v1
+      - name: List Files after checkout
+        run: |
+          pwd
+          ls -a
+      - name: Simple JS Action
+        id: greet
+        # instead of "run", we can use "uses" which take a reference to an action
+        # to use other action, the reference path are in the follow format:
+        # <profile>/<repository name>@<master / tag version / id of commit version>
+        # use the commit version would be the safest way
+        uses: actions/hello-world-javascript-action@v1.1
+        # here is the input for the hello-world-javascript-action
+        # the input parameter name is defined with name "who-to-greet"
+        with:
+          who-to-greet: John
+      - name: Log Greeting Time
+        # the ${{ steps.greet.outputs.time }}" is the output of the actions above
+        # you can see it is reference the action with id = greet
+        run: echo "${{ steps.greet.outputs.time }}"

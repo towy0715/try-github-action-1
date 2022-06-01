@@ -1,0 +1,41 @@
+# the entire name of the workflow
+name: Shell commands
+
+# define which event to listen(?)
+on: [workflow_call]
+
+# define the jobs (which include the steps)
+jobs: 
+  run-shell-command:
+    # environment that the jobs should be execute
+    runs-on: ubuntu-latest
+    # here to define the step of the jobs
+    # the default language of ubuntu would be bash
+    steps: 
+      # step 1: to echo string
+      - name: echo a string
+        # actual command to be run
+        run: echo "Hello World"
+      # step 2: to echo string with multiple line
+      - name: multiline script
+        # actual command to be run (use | for multiple line)
+        run: |
+          node -v
+          npm -v
+      - name: python commands
+        run: |
+          import platform
+          print(platform.processor())
+        # in order to change the running shell, you need to define with shell
+        # to define which shell to use (not bash)
+        shell: python
+  run-windows-command:
+    runs-on: windows-latest
+    needs: ["run-shell-command"]
+    # the default language of window would be power shell
+    steps:
+      - name: directory powershell
+        run: Get-Location
+      - name: directory bash
+        run: pwd
+        shell: bash
