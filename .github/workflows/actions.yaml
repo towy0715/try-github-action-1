@@ -2,7 +2,9 @@ name: Actions Workflow
 
 on: 
   push: 
-    branches:
+    #branches:
+      #- "master"
+    branches-ignore:
       - "master"
   repository_dispatch:
     # this is optional
