@@ -4,8 +4,8 @@ on:
   push: 
     #branches:
       #- "master"
-    branches-ignore:
-      - "master"
+    paths:
+      - "*.txt"
   repository_dispatch:
     # this is optional
     types: [build]
