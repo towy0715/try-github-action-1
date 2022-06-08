@@ -24,6 +24,7 @@ jobs:
         run: |
           echo 'Msg from step2'
       - name: step2 success, so run failed step3
+        # this one will not run, since success() return false when the previous stepsssss have failed
         if: success()
         run: |
           eccho 'step2 success, so run failed step3'
