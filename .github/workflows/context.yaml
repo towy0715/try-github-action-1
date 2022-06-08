@@ -1,15 +1,35 @@
 name: List Context
-on: workflow_dispatch
+on: [workflow_dispatch, push]
 jobs:
   use_function:
     runs-on: ubuntu-latest
     steps:
-      - name: dump
+      - name: run_function
         run: |
           echo ${{ contains( 'hello','ll' ) }}
           echo ${{ startsWith( 'hello','he' ) }}
           echo ${{ endsWith( 'hello', 'lo' ) }}
           echo ${{ format( 'Hello {0} {1} {2}', 'World', '!', '!' ) }}
+  use_if: 
+    runs-on: ubuntu-latest
+    # when using the key "if", no need to add expression syntax ${{}}
+    # since GitHub will already treat the content inside as an expression
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: step1 failed
+        run: |
+          eccho 'Step1 failed'
+      - name: step2 still want to run
+        if: failure()
+        run: |
+          echo 'Msg from step2'
+      - name: step3 failed
+        run: |
+          eccho 'Step1 failed'
+      - name: step4 always run
+        if: always()
+        run: |
+          echo 'step4 run all the times, haha'
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
