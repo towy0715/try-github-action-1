@@ -2,6 +2,10 @@ name: Actions Workflow
 
 on: 
   push: 
+    #branches:
+      #- "master"
+    paths:
+      - "*.txt"
   repository_dispatch:
     # this is optional
     types: [build]
