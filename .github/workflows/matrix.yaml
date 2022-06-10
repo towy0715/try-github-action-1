@@ -14,6 +14,21 @@ jobs:
           # ubuntu-latest+6, ubuntu-latest+8, ubuntu-latest+10
           # windows-latest+6, windows-latest+8, windows-latest+10
         os: [ macos-latest, ubuntu-latest, windows-latest ]
+        # the include function is not to include extra item to the array
+        # the include function is to add extra variable for the specific array which is contain in the matrix
+        # in the following case, when the matrix reached the combination: ubuntu+8
+        # there would be an extra is_ubuntu_8 variable
+        # for other combination, this value does not exist
+        include:
+          - os: ubuntu-latest
+            node_version: 8
+            is_ubuntu_8: "true"
+        # this is to exclude the unnecessary item in matrix
+        exclude:
+          - os: ubuntu-latest
+            node_version: 6
+          - os: windows-latest
+            node_version: 8
 
       # ** the following options 
       # ** true = means if one of the job is failed, the other jobs in the matrix will stop
@@ -25,6 +40,8 @@ jobs:
       # ** by default, the GitHub will maximize the no. of jobs to be run in parallel
       # max-parallel: 2
     runs-on: ${{ matrix.os }}
+    env: 
+      IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }}
     steps:
       - name: log node-version
         run: node -v
@@ -34,4 +51,6 @@ jobs:
           # for (int vers : node_version)
           node-version: ${{ matrix.node_version }}
       - name: log node-version
-        run: node -v
+        run: |
+          node -v
+          echo "IS_UBUNTU_8 = $IS_UBUNTU_8"
