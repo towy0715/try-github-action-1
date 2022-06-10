@@ -1,0 +1,24 @@
+name: Container
+on: push
+
+jobs:
+  node-docker:
+    runs-on: ubuntu-latest
+    # <node> = the docker hub user name
+    # <13.5.0-alpine3.10> = the image name
+    # the following two are the same
+    #container: node:13.5.0-alpine3.10
+    container: 
+      image: node:13.5.0-alpine3.10
+      # in container, you can specify the following:
+      #env:
+      #ports:
+      #volumes:
+      #options: --cpus 1 --host
+    # as defined the container, any jobs here will be ran inside the container
+    # but not directly in the our host (the VM).
+    steps: 
+      - name: Log Node Version
+        run: |
+          node -v
+          cat /etc/os-release
