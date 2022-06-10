@@ -1,14 +1,37 @@
 name: matrix
-on: push
+on: workflow_dispatch
 
 jobs:
   node-version:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        # the name "node_version" is customize, change be any name
+        # it is an array
+        node_version: [6, 8, 10]
+        # the setting here would become a 3X3 matrix (node_version * os)
+        # therefore, this job would run 9 times
+          # macos-latest+6, macos-latest+8, macos-latest+10
+          # ubuntu-latest+6, ubuntu-latest+8, ubuntu-latest+10
+          # windows-latest+6, windows-latest+8, windows-latest+10
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+
+      # ** the following options 
+      # ** true = means if one of the job is failed, the other jobs in the matrix will stop
+      # ** false = means all the jobs will run independent of the result of other jobs
+      # **this is not mandatory
+      # fail-fast: true
+
+      # ** another option: max-parallel, this will limit the job to be run in parallel
+      # ** by default, the GitHub will maximize the no. of jobs to be run in parallel
+      # max-parallel: 2
+    runs-on: ${{ matrix.os }}
     steps:
       - name: log node-version
         run: node -v
       - uses: actions/setup-node@v1
         with:
-          node-version: 6
+          # the value here would be change each time, just like an array
+          # for (int vers : node_version)
+          node-version: ${{ matrix.node_version }}
       - name: log node-version
         run: node -v
