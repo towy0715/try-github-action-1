@@ -4,9 +4,14 @@ on: push
 jobs:
   node-docker:
     runs-on: ubuntu-latest
+    # to run multiple docker service in github action
     services:
+      # service 1 which is an application
       app:
+        # image is retrieved from DockerHub
         image: alialaa17/node-api
+        # <outside port>:<inside port>
+        # in order to access from outside, need to use port 3001
         ports:
           - 3001:3000
       mongo:
