@@ -35,7 +35,7 @@ jobs:
           echo $GITHUB_WORKSPACE
           ls -al
           cd $GITHUB_WORKSPACE
-          chmod script.sh u+x
+          chmod u+x script.sh
           ls -al
       - name: Run a script
         uses: docker://node:12.14.1-alpine3.10
