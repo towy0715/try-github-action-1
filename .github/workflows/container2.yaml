@@ -29,6 +29,20 @@ jobs:
           # in yaml, we can omit the quotation?
           entrypoint: /usr/local/bin/node
           args: -v
+      - uses: actions/checkout@v1
+      - name: chmod
+        run: |
+          echo $GITHUB_WORKSPACE
+          ls -al
+          cd $GITHUB_WORKSPACE
+          chmod script.sh u+x
+          ls -al
+      - name: Run a script
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          # in yaml, we can omit the quotation?
+          entrypoint: ./script.sh
+          args: "some string"
   node-docker:
     runs-on: ubuntu-latest
     # to run multiple docker service in github action
