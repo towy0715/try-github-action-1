@@ -2,6 +2,33 @@ name: Container2
 on: push
 
 jobs:
+  docker-steps:
+    # tutor said docker image can only run on ubuntu (not mac / window)
+    runs-on: ubuntu-latest
+    container:
+      image: node:10.18.0-jessie
+    steps:
+      # the step would be run in container
+      - name: log node Version
+        run: node -v
+      - name: step with docker
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          # the entrypoint is just a path to an executable (in github action)
+          # but not passing in an array
+          entrypoint: "/bin/echo"
+          # this args is similar to the CMD in docker
+          # i.e to pass the argument to the entry point
+          # in this case, the entry point = "echo"
+          # For args, can only support ONE argument only
+          # type = string
+          args: "Hello World"
+      - name: Log node version
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          # in yaml, we can omit the quotation?
+          entrypoint: /usr/local/bin/node
+          args: -v
   node-docker:
     runs-on: ubuntu-latest
     # to run multiple docker service in github action
