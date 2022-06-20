@@ -1,5 +1,5 @@
 name: Container2
-on: push
+on: workflow_dispatch
 
 jobs:
   docker-steps:
@@ -42,7 +42,13 @@ jobs:
         with: 
           # in yaml, we can omit the quotation?
           entrypoint: ./script.sh
+          # the following would be treated as 2 argument....
           args: "some string"
+      - name: send slack message
+        uses: docker://technosophos/slack-notify
+        env: 
+          SLACK_WEBHOOOK: ${{ secret.SLACK_WEBHOOK }}
+          SLACK_MESSAGE: "Hello"
   node-docker:
     runs-on: ubuntu-latest
     # to run multiple docker service in github action
