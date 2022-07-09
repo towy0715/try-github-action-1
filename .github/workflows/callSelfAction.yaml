@@ -10,7 +10,7 @@ jobs:
         run: |
           pwd
           ls -al .github/actions/hello-docker/
-          chmod u+x .github/actions/hello-docker/entrypoint.sh
+          chmod a+x .github/actions/hello-docker/entrypoint.sh
           ls -al .github/actions/hello-docker/
       - name: Simple JS Action
         id: greet
