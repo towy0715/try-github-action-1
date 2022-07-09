@@ -19,3 +19,4 @@ jobs:
           who-to-greet: John
       - run: |
           echo "Time: ${{ steps.greet.outputs.time }}"
+          echo "${{ env.HELLO }}"
